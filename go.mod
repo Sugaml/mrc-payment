@@ -3,7 +3,7 @@ module github.com/Sugaml/mrc-payment
 go 1.18
 
 require (
-	github.com/golang/mock v1.6.0
+	github.com/babulalt/go-khalti v0.0.0-20220611044506-04268a3224c7
 	github.com/gorilla/mux v1.8.0
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.4.0
