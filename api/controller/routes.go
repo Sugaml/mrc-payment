@@ -16,7 +16,6 @@ func (server *Server) setAdmin(path string, next func(http.ResponseWriter, *http
 }
 
 func (server *Server) initializeRoutes() {
-	server.Router.Use(middleware.CORS)
 	server.setJSON("/", server.WelcomePage, "GET")
 
 	server.setJSON("/payment/invoice", server.CreateIvoice, "POST")
@@ -25,6 +24,10 @@ func (server *Server) initializeRoutes() {
 
 	server.setJSON("/payment/invoice", server.CreateGateway, "POST")
 	server.setAdmin("/payment/transactions", server.GetTransaction, "GET")
+	server.setJSON("payment/invoice", server.CreateIvoice, "POST")
+
+	server.setJSON("payment/invoice", server.CreateGateway, "POST")
+	server.setJSON("/payment/transactions", server.GetTransaction, "Get")
 }
 
 func (server *Server) WelcomePage(w http.ResponseWriter, r *http.Request) {
