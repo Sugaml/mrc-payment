@@ -33,7 +33,7 @@ func (d TransactionRepo) CreateTransaction(db *gorm.DB, data models.Transaction)
 
 func (d TransactionRepo) FilterTransactionByStatus(db *gorm.DB, userID, page, size uint64, status, startdate, enddate, q, sortColumn, sortDirection string) ([]models.Transaction, int64, error) {
 	transactions := []models.Transaction{}
-	f := db.Model(&models.Transaction{})
+	f := db.Model(&models.Transaction{}).Preload("Student")
 	count := 0
 	if len(status) > 0 {
 		f = f.Where("status = ? ", status)

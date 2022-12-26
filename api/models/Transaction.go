@@ -8,7 +8,8 @@ type Transaction struct {
 	gorm.Model
 	Title       string   `gorm:"not null" json:"title"`
 	User        *User    `gorm:"foreignkey:UserID" json:"user"`
-	UserID      uint     `gorm:"not null" json:"user_id"`
+	SID         uint     `gorm:"foreignkey:SID" json:"sid"`
+	Student     *Student `gorm:"-" json:"student"`
 	Amount      float64  `gorm:"not null" json:"amount"`
 	Invoice     *Invoice `gorm:"foreignkey:InvoiceID" json:"invoice"`
 	InvoiceID   uint     `gorm:"not null" json:"invoice_id"`

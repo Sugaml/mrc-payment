@@ -79,20 +79,20 @@ func (s *Server) VerifyPayment(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
-	// student, err := sRepo.FindbyId(s.DB, uint(data.SID))
-	// if err != nil {
-	// 	responses.ERROR(w, http.StatusNotFound, err)
-	// 	return
-	// }
-	// fmt.Println(data)
+	student, err := sRepo.FindbyId(s.DB, uint(data.SID))
+	if err != nil {
+		responses.ERROR(w, http.StatusNotFound, err)
+		return
+	}
+	fmt.Println(data)
 	verifyPayment, err := khalti.VerifyPayment(data.Token, data.Amount)
 	if err != nil {
 		responses.ERROR(w, http.StatusUnprocessableEntity, err)
 		return
 	}
 	tdata := models.Transaction{
-		Title: fmt.Sprintf("Fee Payment on %s , %s", time.Now().Month().String(), fmt.Sprint(time.Now().Date())),
-		//UserID:      student.ID,
+		Title:       fmt.Sprintf("Fee Payment on %s , %s", time.Now().Month().String(), fmt.Sprint(time.Now().Date())),
+		SID:         student.ID,
 		Amount:      float64(verifyPayment.State.Amount),
 		GatewayID:   1,
 		RefrenceID:  verifyPayment.TransactionID,
