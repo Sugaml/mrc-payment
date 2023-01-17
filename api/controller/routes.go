@@ -31,5 +31,5 @@ func (server *Server) initializeRoutes() {
 }
 
 func (server *Server) WelcomePage(w http.ResponseWriter, r *http.Request) {
-	responses.JSON(w, http.StatusOK, "welcome to mrc-api project")
+	responses.JSON(w, http.StatusOK, "welcome to mrc-payment project")
 }
