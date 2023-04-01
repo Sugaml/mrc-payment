@@ -49,6 +49,7 @@ func (d TransactionRepo) FilterTransactionByStatus(db *gorm.DB, userID, page, si
 		Order(sortColumn + " " + sortDirection).
 		Limit(size).
 		Offset(size * (page - 1)).
+		Preload("Student").
 		Find(&transactions).Error
 	if err != nil {
 		return []models.Transaction{}, 0, err
