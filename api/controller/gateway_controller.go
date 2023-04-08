@@ -93,7 +93,7 @@ func (s *Server) VerifyPayment(w http.ResponseWriter, r *http.Request) {
 	tdata := models.Transaction{
 		Title:       fmt.Sprintf("Fee Payment on %s , %s", time.Now().Month().String(), fmt.Sprint(time.Now().Date())),
 		StudentID:   student.ID,
-		Amount:      float64(verifyPayment.State.Amount),
+		Amount:      float64(data.Amount),
 		GatewayID:   1,
 		RefrenceID:  verifyPayment.TransactionID,
 		PaymentMode: "Wallet",
