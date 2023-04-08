@@ -30,7 +30,7 @@ var tRepo = repository.NewTransactionRepo()
 // @Router  /payment/transaction [get]
 func (server *Server) GetTransaction(w http.ResponseWriter, r *http.Request) {
 	status := r.URL.Query().Get("status")
-	studentID, _ := strconv.ParseUint(r.URL.Query().Get("user_id"), 10, 32)
+	studentID, _ := strconv.ParseUint(r.URL.Query().Get("student_id"), 10, 32)
 	size, _ := strconv.ParseUint(r.URL.Query().Get("size"), 10, 32)
 	page, _ := strconv.ParseUint(r.URL.Query().Get("page"), 10, 32)
 	search := r.URL.Query().Get("search")
