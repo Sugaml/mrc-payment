@@ -24,6 +24,8 @@ func (server *Server) initializeRoutes() {
 
 	server.setJSON("/payment/invoice", server.CreateGateway, "POST")
 	server.setAdmin("/payment/transactions", server.GetTransaction, "GET")
+	server.setJSON("/payment/transactions", server.GetTransaction, "GET")
+
 	server.setJSON("payment/invoice", server.CreateIvoice, "POST")
 
 	server.setJSON("payment/invoice", server.CreateGateway, "POST")

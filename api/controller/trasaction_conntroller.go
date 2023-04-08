@@ -18,7 +18,7 @@ var tRepo = repository.NewTransactionRepo()
 // @Produce  json
 // @Param x-user-role header string true "x-user-role"
 // @Param status path string true "Status"
-// @Param user_id path string true "User ID"
+// @Param student_id path string true "Student ID"
 // @Param startdate path string true "Start Date"
 // @Param enddate path string true "End Date"
 // @Param size path string true "Size"
@@ -30,7 +30,7 @@ var tRepo = repository.NewTransactionRepo()
 // @Router  /payment/transaction [get]
 func (server *Server) GetTransaction(w http.ResponseWriter, r *http.Request) {
 	status := r.URL.Query().Get("status")
-	userID, _ := strconv.ParseUint(r.URL.Query().Get("user_id"), 10, 32)
+	studentID, _ := strconv.ParseUint(r.URL.Query().Get("user_id"), 10, 32)
 	size, _ := strconv.ParseUint(r.URL.Query().Get("size"), 10, 32)
 	page, _ := strconv.ParseUint(r.URL.Query().Get("page"), 10, 32)
 	search := r.URL.Query().Get("search")
@@ -50,7 +50,7 @@ func (server *Server) GetTransaction(w http.ResponseWriter, r *http.Request) {
 	if sortDirection == "" {
 		sortDirection = "desc"
 	}
-	datas, count, err := tRepo.FilterTransactionByStatus(server.DB, userID, page, size, status, startdate, enddate, search, sortColumn, sortDirection)
+	datas, count, err := tRepo.FilterTransactionByStatus(server.DB, studentID, page, size, status, startdate, enddate, search, sortColumn, sortDirection)
 	if err != nil {
 		responses.ERROR(w, http.StatusInternalServerError, err)
 		return

@@ -31,15 +31,15 @@ func (d TransactionRepo) CreateTransaction(db *gorm.DB, data models.Transaction)
 	return data, nil
 }
 
-func (d TransactionRepo) FilterTransactionByStatus(db *gorm.DB, userID, page, size uint64, status, startdate, enddate, q, sortColumn, sortDirection string) ([]models.Transaction, int64, error) {
+func (d TransactionRepo) FilterTransactionByStatus(db *gorm.DB, studentId, page, size uint64, status, startdate, enddate, q, sortColumn, sortDirection string) ([]models.Transaction, int64, error) {
 	transactions := []models.Transaction{}
 	f := db.Model(&models.Transaction{})
 	count := 0
 	if len(status) > 0 {
 		f = f.Where("status = ? ", status)
 	}
-	if userID > 0 {
-		f = f.Where("user_id= ? ", userID)
+	if studentId > 0 {
+		f = f.Where("student_id= ? ", studentId)
 	}
 	if len(startdate) != 0 && len(enddate) != 0 {
 		f = f.Where("created_at BETWEEN ?::timestamp AND ?::timestamp", startdate, enddate)
